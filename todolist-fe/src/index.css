@@ -1,0 +1,117 @@
+:root {
+  --hover-color: lightgray;
+  --sidebar-color: whitesmoke;
+  --main-background-color: white;
+  --border-color: lightgray;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+}
+
+body {
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.btn {
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background-color ease 0.2s;
+
+  &:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+  }
+}
+
+.sidebar {
+  background-color: var(--sidebar-color);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+}
+.sidebar__header {
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+.sidebar__header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  user-select: none;
+}
+
+nav {
+  margin: 12px;
+
+}
+
+.group {
+  margin: 4px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.group__actions {
+  padding: 2px;
+  border-radius: 4px;
+  transition: background-color ease 0.2s;
+
+  &:hover {
+    background-color: gray;
+  }
+}
+.group__options {
+  position: absolute;
+  left: calc(100% + 4px);
+  top: 0;
+  background-color: var(--main-background-color);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 4px 6px;
+  border-radius: 8px;
+
+  ul {
+    position: relative;
+    z-index: 2;
+  }
+
+  li {
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all ease .2s;
+    
+    &:hover {
+      cursor: pointer;
+      background-color: var(--hover-color);
+    }
+  }
+
+  span {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    cursor: default;
+    z-index: 1;
+  }
+}
+
+.detail {
+  background-color: var(--main-background-color);
+  flex: 1;
+}
+
