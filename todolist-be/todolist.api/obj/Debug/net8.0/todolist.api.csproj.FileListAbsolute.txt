@@ -133,3 +133,4 @@ C:\Users\qhxiv\Desktop\todolist\todolist-be\todolist.api\obj\Debug\net8.0\refint
 C:\Users\qhxiv\Desktop\todolist\todolist-be\todolist.api\obj\Debug\net8.0\todolist.api.pdb
 C:\Users\qhxiv\Desktop\todolist\todolist-be\todolist.api\obj\Debug\net8.0\todolist.api.genruntimeconfig.cache
 C:\Users\qhxiv\Desktop\todolist\todolist-be\todolist.api\obj\Debug\net8.0\ref\todolist.api.dll
+C:\Users\qhxiv\Desktop\todolist\todolist-be\todolist.api\obj\Debug\net8.0\todolist.api.sourcelink.json

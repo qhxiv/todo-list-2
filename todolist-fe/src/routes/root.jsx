@@ -1,16 +1,16 @@
+import { useState } from "react";
 import { getGroups } from "../api/groupApi";
-import { useLoaderData } from "react-router-dom";
-import Group from "../components/Group";
+import { Outlet, useLoaderData } from "react-router-dom";
 import Header from "../components/Header";
+import GroupItem from "../components/GroupItem";
 
 export async function loader() {
-  const groups = getGroups();
+  const groups = await getGroups();
   return groups;
 }
 
-export async function action() {}
-
 export default function Root() {
+  const [isAdding, setIsAdding] = useState(false);
   const groups = useLoaderData();
 
   return (
@@ -18,11 +18,11 @@ export default function Root() {
       <div className="sidebar">
         <Header />
 
-        <nav>
+        <nav className="sidebar__list">
           {groups.length ? (
             <ul>
               {groups.map((group) => (
-                <Group key={group.id} id={group.id} name={group.name} />
+                <GroupItem key={group.id} id={group.id} name={group.name} />
               ))}
             </ul>
           ) : (
@@ -33,7 +33,9 @@ export default function Root() {
         </nav>
       </div>
 
-      <div className="detail"></div>
+      <div className="detail">
+        <Outlet />
+      </div>
     </>
   );
 }
