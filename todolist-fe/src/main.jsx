@@ -18,9 +18,9 @@ const router = createBrowserRouter([
     action: headerAction,
     children: [
       {
-        path: "groups/:groupId",
+        path: "groups/:groupId/todos",
         element: <Group />
-      }
+      },
     ]
   },
 ]);

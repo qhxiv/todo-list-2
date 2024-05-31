@@ -48,14 +48,14 @@ body {
   width: 400px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--secondary);
+  border-right: 2px solid var(--accent);
 }
 .sidebar__header {
   padding: 8px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--secondary);
+  border-bottom: 2px solid var(--accent);
   height: 50px;
 
   h1 {
@@ -126,6 +126,27 @@ nav {
     user-select: none;
     color: var(--accent);
   }
+  
+  & > button {
+    color: var(--main-background-color);
+    padding: 4px 6px;
+    border-radius: 4px;
+    transition: all ease .2s;
+    margin-left: 4px;
+
+    &:hover {
+      background-color: var(--main-background-color);
+      color: var(--accent);
+    }
+  }
+}
+.group__input {
+  flex: 1;
+  margin-right: 8px;
+  background-color: var(--primary);
+  border: 2px solid var(--secondary);
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 .group__actions {
   display: none;
@@ -153,14 +174,14 @@ nav {
     z-index: 2;
   }
 
-  li {
+  button {
+    width: 100%;
     padding: 4px 8px;
     border-radius: 4px;
     transition: all ease 0.2s;
     user-select: none;
 
     &:hover {
-      cursor: pointer;
       background-color: var(--secondary);
     }
   }

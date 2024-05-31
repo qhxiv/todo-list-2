@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { getGroups } from "../api/groupApi";
 import { Outlet, useLoaderData } from "react-router-dom";
 import Header from "../components/Header";
@@ -10,7 +9,6 @@ export async function loader() {
 }
 
 export default function Root() {
-  const [isAdding, setIsAdding] = useState(false);
   const groups = useLoaderData();
 
   return (

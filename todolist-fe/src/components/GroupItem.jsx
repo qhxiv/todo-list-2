@@ -1,14 +1,38 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import {
+  faEllipsis,
+  faCheck,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import { useRef, useState } from "react";
+import {
+  NavLink,
+  redirect,
+  useNavigate,
+  useRevalidator,
+} from "react-router-dom";
+import { deleteGroup, renameGroup } from "../api/groupApi";
 
 export default function GroupItem({ id, name }) {
   const [clicked, setClicked] = useState(false);
+  const [isEditting, setIsEditting] = useState(false);
+  const [groupName, setGroupName] = useState(name);
+  const inputRef = useRef(null);
 
-  function handleClick() {
-    setClicked(false);
+  let revalidator = useRevalidator();
+  let navigate = useNavigate();
+
+  async function handleEdit() {
+    const newGroup = { name: groupName };
+    await renameGroup(id, newGroup);
+    revalidator.revalidate();
+    setIsEditting(false);
   }
+
+  if (!!inputRef.current)
+    inputRef.current.addEventListener("keydown", (e) => {
+      if (e.code === "Enter") handleEdit();
+    });
 
   return (
     <li key={id} className="group btn">
@@ -20,32 +44,69 @@ export default function GroupItem({ id, name }) {
         }
         to={`/groups/${id}`}
       >
-        <p>{name}</p>
+        {!isEditting ? (
+          <>
+            <p>{name}</p>
 
-        <div
-          className="group__actions"
-          onClick={() => {
-            setClicked(true);
-          }}
-        >
-          <FontAwesomeIcon fixedWidth icon={faEllipsis} />
-        </div>
+            <div
+              className="group__actions"
+              onClick={() => {
+                setClicked(true);
+              }}
+            >
+              <FontAwesomeIcon fixedWidth icon={faEllipsis} />
+            </div>
+          </>
+        ) : (
+          <>
+            <input
+              autoFocus
+              className="group__input"
+              placeholder="Group name"
+              value={groupName}
+              onChange={(e) => setGroupName(e.target.value)}
+              ref={inputRef}
+            />
 
-        {clicked && <GroupOptions onClick={handleClick} />}
+            <button onClick={handleEdit} type="button">
+              <FontAwesomeIcon fixedWidth icon={faCheck} />
+            </button>
+
+            <button onClick={() => setIsEditting(false)} type="button">
+              <FontAwesomeIcon fixedWidth icon={faXmark} />
+            </button>
+          </>
+        )}
+
+        {clicked && (
+          <div className="group__options">
+            <span onClick={() => setClicked(false)}></span>
+
+            <ul>
+              <button
+                onClick={() => {
+                  setIsEditting(true);
+                  setClicked(false);
+                }}
+                type="button"
+              >
+                Edit
+              </button>
+
+              <button
+                onClick={async () => {
+                  await deleteGroup(id);
+                  revalidator.revalidate();
+                  navigate("/");
+                }}
+                type="button"
+              >
+                Delete
+              </button>
+            </ul>
+          </div>
+        )}
       </NavLink>
     </li>
-  );
-}
-
-function GroupOptions({ onClick }) {
-  return (
-    <div className="group__options">
-      <span onClick={onClick}></span>
-
-      <ul>
-        <li>Delete</li>
-        <li>Rename</li>
-      </ul>
-    </div>
   );
 }

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Form, redirect } from "react-router-dom";
 import { createGroup } from "../api/groupApi";
 
@@ -13,6 +13,7 @@ export async function action({ request }) {
 
 export default function Header() {
   const [isAdding, setIsAdding] = useState(false);
+  const inputRef = useRef(null);
 
   return (
     <header className="sidebar__header">
@@ -23,14 +24,22 @@ export default function Header() {
             className="sidebar__form"
             method="post"
           >
-            <input name="name" required type="text" placeholder="Group name" />
+            <input
+              name="name"
+              required
+              type="text"
+              placeholder="Group name"
+              autoFocus
+            />
 
             <button type="submit" className="btn">
               <FontAwesomeIcon fixedWidth icon={faCheck} />
             </button>
 
             <button
-              onClick={() => setIsAdding(false)}
+              onClick={() => {
+                setIsAdding(false);
+              }}
               type="button"
               className="btn"
             >
@@ -41,7 +50,12 @@ export default function Header() {
       ) : (
         <>
           <h1>Groups</h1>
-          <button onClick={() => setIsAdding(true)} className="btn">
+          <button
+            onClick={() => {
+              setIsAdding(true);
+            }}
+            className="btn"
+          >
             <FontAwesomeIcon fixedWidth icon={faPlus} />
           </button>
         </>
