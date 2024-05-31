@@ -42,6 +42,23 @@ public static class TodosEndpoints
       return Results.NoContent();
     });
 
+    // PUT /todos/1
+    group.MapPut("/{id}", async (int id, UpdateTodoDto updatedTodo, TodolistContext dbContext) =>
+    {
+      var existingTodo = await dbContext.Todos.FindAsync(id);
+
+      if (existingTodo is null)
+        return Results.NotFound();
+
+      dbContext.Entry(existingTodo)
+               .CurrentValues
+               .SetValues(updatedTodo.ToEntity(id));
+
+      await dbContext.SaveChangesAsync();
+
+      return Results.NoContent();
+    });
+
     return group;
   }
 }

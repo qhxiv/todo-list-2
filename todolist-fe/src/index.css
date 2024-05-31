@@ -1,14 +1,7 @@
 :root {
-  --active-text-color: white;
-  --hover-color: lightgray;
-  --active-color: rgb(97, 97, 97);
-  --sidebar-color: whitesmoke;
-  --main-background-color: white;
-  --border-color: lightgray;
-  --border-color-2: darkgray;
-
   --primary: white;
   --secondary: lightgray;
+  --tertiary: whitesmoke;
   --accent: #282828;
 }
 
@@ -16,6 +9,7 @@ html {
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-size: 16px;
+  color: var(--accent);
 }
 
 body {
@@ -55,8 +49,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--accent);
-  height: 50px;
+  border-bottom: 2px solid var(--secondary);
+  height: 64px;
 
   h1 {
     font-size: 20px;
@@ -98,14 +92,19 @@ nav {
   align-items: center;
   position: relative;
 
+  p {
+    font-weight: 500;
+  }
+
   &:hover .group__actions {
     display: block;
   }
 
   &:has(.active) {
     background-color: var(--accent);
-    
-    p, .group__actions {
+
+    p,
+    .group__actions {
       color: var(--primary);
     }
 
@@ -116,7 +115,7 @@ nav {
   }
 }
 .group__link {
-  height: 32px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -126,16 +125,16 @@ nav {
     user-select: none;
     color: var(--accent);
   }
-  
+
   & > button {
-    color: var(--main-background-color);
+    color: var(--primary);
     padding: 4px 6px;
     border-radius: 4px;
-    transition: all ease .2s;
+    transition: all ease 0.2s;
     margin-left: 4px;
 
     &:hover {
-      background-color: var(--main-background-color);
+      background-color: var(--primary);
       color: var(--accent);
     }
   }
@@ -198,6 +197,153 @@ nav {
 }
 
 .detail {
-  background-color: var(--main-background-color);
   flex: 1;
+  background-color: var(--tertiary);
+}
+
+.groupPage__topbar {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary);
+  height: 64px;
+  padding: 8px 16px;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--secondary);
+}
+.groupPage__title {
+  user-select: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.groupPage__body {
+  margin-top: 12px;
+  padding: 0 30%;
+}
+
+.add-todo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  width: 100%;
+  transition: all ease .2s;
+
+  &:hover {
+    background-color: var(--accent);
+    color: var(--primary);
+  }
+}
+
+.add-todo,
+.todo {
+  background-color: var(--primary);
+  display: flex;
+  padding: 4px 6px;
+  align-items: center;
+  border-radius: 4px;
+  border: 2px solid var(--accent);
+  margin: 8px 0;
+  position: relative;
+}
+.todo__check {
+  margin-right: 8px;
+}
+.todo__body {
+  flex: 1;
+  user-select: none;
+
+  p {
+    font-weight: 600;
+  }
+
+  span {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: .6;
+  }
+}
+.todo__options {
+  position: absolute;
+  left: calc(100% + 4px);
+  top: -2px;
+  background-color: var(--primary);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 4px 6px;
+  border: 1px solid var(--secondary);
+  border-radius: 8px;
+
+  ul {
+    position: relative;
+    z-index: 2;
+  }
+
+  button {
+    width: 100%;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all ease 0.2s;
+    user-select: none;
+
+    &:hover {
+      background-color: var(--secondary);
+    }
+  }
+
+  span {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    cursor: default;
+    z-index: 1;
+  }
+}
+.todo__edit {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.todo__name {
+  font-weight: 600;
+  margin-bottom: 4px;
+  
+  &:focus {
+    outline: none;
+  }
+}
+.todo__desc {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+
+  &:focus {
+    outline: none;
+  }
+}
+.todo__controls {
+  border-top: 2px solid var(--secondary);
+  padding-top: 4px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.todo__cancel,
+.todo__save {
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 4px;
+  transition: all ease .2s;
+
+  &:hover {
+    opacity: .8;
+  }
+}
+.todo__cancel {
+  background-color: var(--secondary);
+  font-weight: 500;
+}
+.todo__save {
+  background-color: var(--accent);
+  color: var(--primary);
 }

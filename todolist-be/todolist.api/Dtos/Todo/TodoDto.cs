@@ -4,5 +4,6 @@ public record class TodoDto(
   int Id,
   int GroupId,
   string Name,
-  string Description
+  string Description,
+  bool Done
 );

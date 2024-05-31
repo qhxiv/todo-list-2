@@ -5,25 +5,19 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRef, useState } from "react";
-import {
-  NavLink,
-  redirect,
-  useNavigate,
-  useRevalidator,
-} from "react-router-dom";
+import { NavLink, useNavigate, useRevalidator } from "react-router-dom";
 import { deleteGroup, renameGroup } from "../api/groupApi";
 
 export default function GroupItem({ id, name }) {
   const [clicked, setClicked] = useState(false);
   const [isEditting, setIsEditting] = useState(false);
-  const [groupName, setGroupName] = useState(name);
   const inputRef = useRef(null);
 
   let revalidator = useRevalidator();
   let navigate = useNavigate();
 
   async function handleEdit() {
-    const newGroup = { name: groupName };
+    const newGroup = { name: inputRef.current.value };
     await renameGroup(id, newGroup);
     revalidator.revalidate();
     setIsEditting(false);
@@ -63,8 +57,7 @@ export default function GroupItem({ id, name }) {
               autoFocus
               className="group__input"
               placeholder="Group name"
-              value={groupName}
-              onChange={(e) => setGroupName(e.target.value)}
+              defaultValue={name}
               ref={inputRef}
             />
 
@@ -90,7 +83,7 @@ export default function GroupItem({ id, name }) {
                 }}
                 type="button"
               >
-                Edit
+                Rename
               </button>
 
               <button

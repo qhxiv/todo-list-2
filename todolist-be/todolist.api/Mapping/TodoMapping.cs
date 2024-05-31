@@ -11,7 +11,8 @@ public static class TodoMapping
     {
       GroupId = groupId,
       Name = dto.Name,
-      Description = dto.Description
+      Description = dto.Description,
+      Done = false
     };
   }
 
@@ -22,7 +23,8 @@ public static class TodoMapping
       Id = id,
       GroupId = dto.GroupId,
       Name = dto.Name,
-      Description = dto.Description
+      Description = dto.Description,
+      Done = dto.Done
     };
   }
 
@@ -32,7 +34,8 @@ public static class TodoMapping
       todo.Id,
       todo.GroupId,
       todo.Name,
-      todo.Description
+      todo.Description,
+      todo.Done
     );
   }
 }

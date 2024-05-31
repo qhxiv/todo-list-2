@@ -8,7 +8,7 @@ import "./index.css";
 import Root, { loader as rootLoader } from "./routes/root";
 
 import { action as headerAction } from "./components/Header";
-import Group from "./routes/group";
+import Group, { loader as groupLoader } from "./routes/group";
 
 const router = createBrowserRouter([
   {
@@ -18,10 +18,11 @@ const router = createBrowserRouter([
     action: headerAction,
     children: [
       {
-        path: "groups/:groupId/todos",
-        element: <Group />
+        path: "groups/:groupId",
+        element: <Group />,
+        loader: groupLoader,
       },
-    ]
+    ],
   },
 ]);
 

@@ -1,9 +1,13 @@
 import axios from "axios";
 import { API } from "./apiUrl";
-import { redirect } from "react-router-dom";
 
 export async function getGroups() {
   const res = await axios.get(`${API}/groups`);
+  return res.data;
+}
+
+export async function getGroup(id) {
+  const res = await axios.get(`${API}/groups/${id}`);
   return res.data;
 }
 
